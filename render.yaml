@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: controledegastos
+    runtime: docker
+    repo: https://github.com/GuilhermeSoares2005/Controle-de-Gastos
+    plan: starter
+    region: oregon
+    branch: main
+    envVars:
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+      - key: SPRING_DATASOURCE_URL
+        value: ${db.DATABASE_URL}
+      - key: SPRING_DATASOURCE_USERNAME
+        value: ${db.DATABASE_USER}
+      - key: SPRING_DATASOURCE_PASSWORD
+        value: ${db.DATABASE_PASSWORD}
+    buildCommand: docker build -t controle-de-gastos .
+    startCommand: docker run -p $PORT:8080 controle-de-gastos
+    healthCheckPath: /
+
+databases:
+  - name: controlegastos-db
+    databaseName: controlegastos
+    plan: starter
+
