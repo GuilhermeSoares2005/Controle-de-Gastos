@@ -15,8 +15,6 @@ services:
         value: ${db.DATABASE_USER}
       - key: SPRING_DATASOURCE_PASSWORD
         value: ${db.DATABASE_PASSWORD}
-    buildCommand: docker build -t controle-de-gastos .
-    startCommand: docker run -p $PORT:8080 controle-de-gastos
     healthCheckPath: /
 
 databases:
