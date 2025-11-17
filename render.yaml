@@ -9,12 +9,30 @@ services:
     envVars:
       - key: SPRING_PROFILES_ACTIVE
         value: prod
-      - key: SPRING_DATASOURCE_URL
-        value: ${db.DATABASE_URL}
-      - key: SPRING_DATASOURCE_USERNAME
-        value: ${db.DATABASE_USER}
-      - key: SPRING_DATASOURCE_PASSWORD
-        value: ${db.DATABASE_PASSWORD}
+      - key: DATABASE_URL
+        fromDatabase:
+          name: controlegastos-db
+          property: connectionString
+      - key: DB_HOST
+        fromDatabase:
+          name: controlegastos-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: controlegastos-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: controlegastos-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: controlegastos-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: controlegastos-db
+          property: password
     healthCheckPath: /
 
 databases:
